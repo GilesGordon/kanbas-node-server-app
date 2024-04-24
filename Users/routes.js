@@ -22,14 +22,15 @@ export default function UserRoutes(app) {
     currentUser = await dao.findUserById(userId);
     res.json(status);
   };
-  const signin = async (req, res) => { 
+
+  const signin = async (req, res) => {
     const { username, password } = req.body;
     const currentUser = await dao.findUserByCredentials(username, password);
     if (currentUser) {
       req.session["currentUser"] = currentUser;
       res.json(currentUser);
     } else {
-      res.sendStatus(401);
+      res.status(401).json({ message: "Incorrect credentials" });
     }
   };
   const signout = (req, res) => {
