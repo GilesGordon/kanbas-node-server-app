@@ -12,7 +12,8 @@ const CONNECTION_STRING = process.env.DB_CONNECTION_STRING //'mongodb://127.0.0.
 mongoose.connect(CONNECTION_STRING);
 const app = express()
 app.use(cors({   credentials: true,
-    origin: process.env.FRONTEND_URL,}));
+    origin: process.env.FRONTEND_URL,
+    allowedHeaders: ['Content-Type', 'Authorization']}));
 const sessionOptions = {
     secret: process.env.SESSION_SECRET,
     resave: false,
